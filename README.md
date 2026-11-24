@@ -14,6 +14,22 @@ read-only by default.
 > AegisRMF produces **readiness indicators**. It never issues or infers CMMC certification, Conditional
 > or Final status, or an ATO. AI output is advisory; a human assessor records every result.
 
+## Demos
+
+Recorded against the synthetic demo data (a fictional machine shop). AI output is always shown inside a dashed violet border; only a human reviewer's decisions change results.
+
+**1. Assessment overview:** all 110 requirements sized by the points they can cost, the score with its trace, and a drill-down into a failed requirement
+
+[▶ Watch (30 s)](docs/demos/1-assessment-overview.mp4)
+
+**2. Evidence review:** a reviewer accepts and rejects AI-proposed citations, then sees them on the requirement
+
+[▶ Watch (27 s)](docs/demos/2-evidence-review.mp4)
+
+**3. POA&M rules and audit trail:** each item checked against 32 CFR 170.21, then the tamper-evident log
+
+[▶ Watch (13 s)](docs/demos/3-poam-and-audit.mp4)
+
 ## What makes it different
 - **Scores an assessor can reproduce by hand.** Pure scoring engine, rules transcribed from 32 CFR 170.24
   (5/3/1 points, MFA and FIPS partial credit, N/A as MET, SSP blocker), trace lines, input hash, snapshot
