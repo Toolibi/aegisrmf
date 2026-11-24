@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/d45f1b7b-64d8-4cad-9ab3-e7b2286dac42
+
 # AegisRMF
 
 ![Assessment overview](docs/screenshots/overview.png)
@@ -20,15 +24,15 @@ Recorded against the synthetic demo data (a fictional machine shop). AI output i
 
 **1. Assessment overview:** all 110 requirements sized by the points they can cost, the score with its trace, and a drill-down into a failed requirement
 
-[▶ Watch (30 s)](docs/demos/1-assessment-overview.mp4)
+https://github.com/user-attachments/assets/b7c350cb-db57-4418-82ba-1c9cbeb7b8df
 
 **2. Evidence review:** a reviewer accepts and rejects AI-proposed citations, then sees them on the requirement
 
-[▶ Watch (27 s)](docs/demos/2-evidence-review.mp4)
+https://github.com/user-attachments/assets/37dbc07e-b149-4642-b757-0943b35dff27
 
 **3. POA&M rules and audit trail:** each item checked against 32 CFR 170.21, then the tamper-evident log
 
-[▶ Watch (13 s)](docs/demos/3-poam-and-audit.mp4)
+https://github.com/user-attachments/assets/b06b8f7f-100d-4579-9ea9-a3898e5cdb54
 
 ## What makes it different
 - **Scores an assessor can reproduce by hand.** Pure scoring engine, rules transcribed from 32 CFR 170.24
