@@ -1,0 +1,11 @@
+NORTHWIND PRECISION MACHINING LLC - SYNTHETIC TEST DOCUMENT
+Access Control Policy (AC-POL-01) v2.1
+1 Purpose
+This policy defines how access to the CUI enclave is granted and reviewed.
+2 Policy
+Authorized users are identified by unique accounts issued by IT after manager approval.
+Processes acting on behalf of authorized users run under named service accounts.
+Devices authorized to connect to the enclave are recorded in the asset inventory.
+Least privilege shall be applied; privileged accounts are separate from everyday accounts.
+Session lock activates after 15 minutes of inactivity with pattern-hiding displays.
+Visitors must be escorted at all times and the visitor log is retained for one year.

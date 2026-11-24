@@ -1,0 +1,5 @@
+device,os,antivirus_enabled,signature_age_days,realtime_protection
+NW-ENG-01,Windows 11,true,0,On
+NW-ENG-02,Windows 11,true,1,On
+NW-CNC-PC1,Windows 10 IoT,true,0,On
+note,Malicious code protection is employed on all endpoints; antivirus signatures updated daily,,,

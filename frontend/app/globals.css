@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "@fontsource/public-sans/400.css";
+@import "@fontsource/public-sans/500.css";
+@import "@fontsource/public-sans/600.css";
+@import "@fontsource/public-sans/700.css";
+
+/* AegisRMF tokens. Public Sans is the U.S. Web Design System typeface: the dashboard speaks the
+   visual language of the federal programs its users answer to. Navy #1F4E79 ties to the owner's brand. */
+@theme {
+  --font-sans: "Public Sans", system-ui, sans-serif;
+  --color-paper: #f5f7f9;
+  --color-panel: #ffffff;
+  --color-ink: #1b2430;
+  --color-steel: #5b6b7d;
+  --color-line: #d9dfe6;
+  --color-navy: #1f4e79;
+  --color-navy-soft: #e6eef6;
+  --color-met: #2f7d5b;
+  --color-notmet: #b3261e;
+  --color-insufficient: #b7791f;
+  --color-unassessed: #c4ccd6;
+  --color-na: #8fa3b8;
+  --color-ai: #6a4fb3;
+  --color-ai-soft: #f1edfa;
+}
+
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); font-feature-settings: "tnum" 1; }
+:focus-visible { outline: 2px solid var(--color-navy); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* Status swatches shared by matrix, badges and legend */
+.st-MET { background: var(--color-met); }
+.st-NOT_MET { background: var(--color-notmet); }
+.st-INSUFFICIENT_EVIDENCE { background: var(--color-insufficient); }
+.st-NOT_ASSESSED { background: var(--color-unassessed); }
+.st-NOT_APPLICABLE { background: repeating-linear-gradient(135deg, var(--color-na) 0 3px, #d5dee8 3px 6px); }
+
+/* AI-origin content is always fenced with a dashed violet rule, never a solid one */
+.ai-fence { border: 1.5px dashed var(--color-ai); background: var(--color-ai-soft); }

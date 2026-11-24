@@ -1,0 +1,9 @@
+{
+  "synthetic": true,
+  "tenant": "northwind-synthetic.example",
+  "policies": [
+    {"name": "Require MFA for all users", "state": "enabled", "grantControls": ["mfa"],
+     "users": "All users", "note": "Multifactor authentication enforced for network access to privileged and non-privileged accounts"},
+    {"name": "Block legacy authentication", "state": "enabled", "clientApps": ["exchangeActiveSync", "other"]}
+  ]
+}

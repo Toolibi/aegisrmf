@@ -1,0 +1,10 @@
+__pycache__/
+*.db
+data/
+.env
+.pytest_cache/
+demo_output/
+sbom.cdx.json
+node_modules/
+.next/
+frontend/next-env.d.ts
