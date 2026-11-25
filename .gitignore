@@ -1,6 +1,6 @@
 __pycache__/
 *.db
-data/
+backend/data/
 .env
 .pytest_cache/
 demo_output/
