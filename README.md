@@ -9,6 +9,9 @@ https://github.com/user-attachments/assets/d45f1b7b-64d8-4cad-9ab3-e7b2286dac42
 **AI-assisted CMMC / NIST SP 800-171 readiness platform with deterministic, regulation-aligned scoring
 and a secure Model Context Protocol (MCP) server.**
 
+> **Built with Claude Code.** Product direction, CMMC scoring and POA&M rules, review of the AI's evidence
+> mappings, and live Azure testing by Prince Boafo (CMMC-CCP, CISM).
+
 AegisRMF lets a defense contractor, MSP or consultant scope a CUI boundary, upload evidence, get
 AI-proposed evidence-to-objective mappings with exact citations, record human determinations, compute a
 reproducible 32 CFR 170.24 score, manage POA&Ms under the 170.21 rules, and export an SSP draft and a
