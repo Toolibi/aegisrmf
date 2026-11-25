@@ -56,7 +56,7 @@ https://github.com/user-attachments/assets/b06b8f7f-100d-4579-9ea9-a3898e5cdb54
 ## Verification status (honest)
 | Area | Status |
 |---|---|
-| Test suite | **68 tests pass on PostgreSQL 16 with RLS enforced** (non-superuser role); 67 pass + 1 PG-only skip on SQLite |
+| Test suite | **69 tests pass on PostgreSQL 16 with RLS enforced** (non-superuser role); 68 pass + 1 PG-only skip on SQLite |
 | Vertical slice: tenant → system → catalog → evidence → findings → score → POA&M → SSP → report | ✅ tested end to end (`tests/test_vertical_slice.py`, `tools/demo.py`) |
 | MCP over streamable HTTP with bearer auth (initialize + tools/call) | ✅ tested in-process |
 | Scoring rules human sign-off | ⏳ `review.status = PENDING_HUMAN_REVIEW` until a qualified reviewer approves |
@@ -75,6 +75,19 @@ AEGIS_TEST_PG_ADMIN_URL=postgresql+psycopg://postgres:pw@localhost:5432/postgres
 python tools/demo.py demo_output            # synthetic end-to-end run, writes report/SSP
 AEGIS_BOOTSTRAP_TOKEN=change-me uvicorn aegisrmf.api.main:app   # API docs at /docs
 ```
+
+### Try it with your own documents
+```bash
+# terminal 1: the API (pick any bootstrap token)
+cd backend
+AEGIS_BOOTSTRAP_TOKEN=pick-a-secret AEGIS_CORS_ORIGINS=http://localhost:3000 uvicorn aegisrmf.api.main:app
+# terminal 2: load every supported file in a folder, then run the analysis
+python tools/load_folder.py "path/to/your/evidence" --system "My enclave" --bootstrap-token pick-a-secret
+```
+Supported: text PDFs, DOCX, XLSX, CSV, TXT/MD, JSON, XML (PNG/JPG stored without OCR), 25 MB each. Each file is
+classified (SSP, policy, procedure, technical specification, configuration export, log, scan…): documents can show a
+control is *defined*, but only configuration exports, logs and scans can show it is *operating*. Only use documents
+you are allowed to use, and do not load real CUI into a test setup.
 
 ### Connect an MCP client (stdio)
 ```json

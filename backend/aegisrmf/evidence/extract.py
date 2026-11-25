@@ -97,27 +97,46 @@ def chunk(lines: list[Line], size: int = CHUNK_LINES) -> list[dict]:
              "line_end": c[-1].line_no, "text": "\n".join(f"{l.line_no}\t{l.text}" for l in c)} for c in chunks]
 
 
+DOCUMENT_RULES = [  # checked first: a document *about* configuration is still a document
+    ("ssp", ("system security plan", "ssp")),
+    ("incident_response_plan", ("incident response plan", "irp")),
+    ("policy", ("policy", "policies")),
+    ("procedure", ("procedure", "sop", "runbook", "standard operating")),
+    ("technical_specification", ("technical specification", "tech spec", "tech_spec", "design document", "architecture")),
+]
+TECHNICAL_RULES = [
+    ("training_record", ("training", "attendance", "completion")),
+    ("vulnerability_report", ("vulnerab", "nessus", "cve-", "scan report")),
+    ("access_review", ("access review", "recertification")),
+    ("configuration", ("config", "gpo", "conditional access", "baseline", "settings", "export", "defender", "intune", "antivirus")),
+    ("log_export", ("log", "logs", "event id", "audit trail", "syslog", "siem")),
+    ("network_diagram", ("diagram", "topology")),
+]
+
+
+def _hit(text: str, keys) -> bool:
+    import re as _re
+    return any(_re.search(r"(?<![a-z])" + _re.escape(k) + r"(?![a-z])", text) for k in keys)
+
+
 def classify_kind(filename: str, lines: list[Line]) -> str:
-    name = filename.lower()
-    head = " ".join(l.text.lower() for l in lines[:40])
-    rules = [
-        ("training_record", ("training", "attendance", "completion")),
-        ("vulnerability_report", ("vulnerab", "nessus", "cve-", "scan report")),
-        ("configuration", ("config", "gpo", "policy setting", "conditional access", "baseline", "\"enabled\"", "settings")),
-        ("log_export", ("log", "event id", "audit trail", "syslog")),
-        ("access_review", ("access review", "recertification")),
-        ("incident_response_plan", ("incident response plan",)),
-        ("ssp", ("system security plan",)),
-        ("network_diagram", ("diagram", "topology")),
-        ("procedure", ("procedure", "sop", "step 1")),
-        ("policy", ("policy", "shall", "must")),
-    ]
-    for kind, keys in rules:
-        if any(k in name for k in keys):
-            return kind
-    for kind, keys in rules:
-        if any(k in head for k in keys):
-            return kind
+    """Document kinds win over technical kinds; filename beats content; the title lines beat the body.
+    Operating evidence (configuration, logs, scans) is only assigned when nothing says it's a document."""
+    name = filename.lower().replace("_", " ").replace("-", " ")
+    title = " ".join(l.text.lower() for l in lines[:3])
+    body = " ".join(l.text.lower() for l in lines[:40])
+    structured = filename.lower().rsplit(".", 1)[-1] in {"json", "csv", "xlsx", "xml", "log"}
+    # Machine exports (JSON/CSV/...) contain words like "policies" as field names; only their filename can mark them a document.
+    for text in ((name,) if structured else (name, title)):
+        for kind, keys in DOCUMENT_RULES:
+            if _hit(text, keys):
+                return kind
+    for text in (name, title, body):
+        for kind, keys in TECHNICAL_RULES:
+            if _hit(text, keys):
+                return kind
+    if _hit(body, ("shall", "must")):
+        return "policy"
     return "other"
 
 

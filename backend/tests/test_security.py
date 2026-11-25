@@ -378,3 +378,19 @@ def test_strict_schema_strips_unsupported_keywords():
     item = out["properties"]["links"]["items"]["properties"]
     assert "maxLength" not in item["quote"] and "minimum" not in item["confidence"]
     assert out["properties"]["links"]["items"]["additionalProperties"] is False
+
+
+def test_evidence_kind_classification():
+    from aegisrmf.evidence.extract import Line, classify_kind as ck
+    L = lambda *t: [Line(None, i + 1, "", x) for i, x in enumerate(t)]
+    assert ck("SSP_Northwind.docx", L("System Security Plan", "Conditional Access requires MFA")) == "ssp"
+    assert ck("Tech_Spec.pdf", L("Technical specification", "Audit logs are forwarded to Sentinel")) == "technical_specification"
+    assert ck("notes.docx", L("System Security Plan - Enclave", "baseline settings")) == "ssp"
+    assert ck("ca_export.json", L('{"policies": []}')) == "configuration"
+    assert ck("defender_endpoint_status.csv", L("device | antivirus_enabled")) == "configuration"
+    assert ck("signin_logs.csv", L("time | user | result")) == "log_export"
+    assert ck("Access Control Policy.pdf", L("Access Control Policy", "Users shall...")) == "policy"
+    assert ck("memo.txt", L("A memo", "Visitors must be escorted")) == "policy"
+    from aegisrmf.evidence import analyzer as an
+    st, warn, _ = an.propose_finding("audit logs are retained", ["ssp", "technical_specification"])
+    assert st == "INSUFFICIENT_EVIDENCE"  # documents alone never prove operation

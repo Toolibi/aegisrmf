@@ -40,11 +40,11 @@ SYNONYMS = {
 
 TECHNICAL_KINDS = {"configuration", "log_export", "vulnerability_report", "access_review",
                    "training_record", "network_diagram", "other_technical"}
-DOCUMENT_KINDS = {"policy", "procedure", "ssp", "incident_response_plan"}
+DOCUMENT_KINDS = {"policy", "procedure", "ssp", "incident_response_plan", "technical_specification"}
 IMPLEMENTATION_VERBS = re.compile(
     r"\b(enforced|limited|employed|monitored|protected|used|controlled|implemented|performed|"
     r"reviewed|conducted|prevented|terminated|encrypted|scanned|updated|tested|disabled|"
-    r"escorted|maintained|logged|blocked|separated|authenticated|sanitized|restricted)\b", re.I)
+    r"escorted|maintained|logged|blocked|separated|authenticated|sanitized|restricted|retained|enforced|generated)\b", re.I)
 
 ANALYZER_VERSION = "1.0.0"
 
